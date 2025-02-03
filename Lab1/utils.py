@@ -1,10 +1,14 @@
 def insertion_sort (arr,l,r):
+    keys = 0
     for i in range (l,r+1):
         for j in range(i,l,-1):
             if(arr[j] < arr[j-1]):
+                keys+=1
                 arr[j], arr[j-1] = arr[j-1], arr[j]
+    return keys
 
 def merge(arr,l,r):
+    keys = 0
     mid = (l+r)//2
     i = l
     j = mid+1
@@ -12,9 +16,11 @@ def merge(arr,l,r):
     while(i <= mid and j <= r):
         if(arr[i] < arr[j]):
             temp.append(arr[i])
+            keys+=1
             i+=1
         else: 
             temp.append(arr[j])
+            keys+=1
             j+=1
     while(i <= mid):
         temp.append(arr[i])
@@ -26,6 +32,7 @@ def merge(arr,l,r):
     for k in range(l,r+1):
         arr[k] = temp[idx]
         idx+=1
+    return keys
 
 def mergeSortwithComparisons(arr):
     if len(arr) <= 1:
@@ -58,20 +65,26 @@ def mergeWithComparisons(left, right,totalkeycomparisons):
 
     return result,totalkeycomparisons
 
+
 def merge_sort(arr,l,r):
     if(l < r):
+        keys = 0
         mid = (l+r) // 2
-        merge_sort(arr,l,mid)
-        merge_sort(arr,mid+1,r)
-        merge(arr,l,r)
+        keys += merge_sort(arr,l,mid)
+        keys += merge_sort(arr,mid+1,r)
+        keys += merge(arr,l,r)
+        return keys
+    else : return 0
 
 def merge_sort_hybrid(arr,l,r,s):
+    keys = 0
     if(r-l+1 <= s):
-        insertion_sort(arr,l,r)
+        keys += insertion_sort(arr,l,r)
     else:
         mid = (l+r) // 2
-        merge_sort_hybrid(arr,l,mid,s)
-        merge_sort_hybrid(arr,mid+1,r,s)
-        merge(arr,l,r)
+        keys += merge_sort_hybrid(arr,l,mid,s)
+        keys+= merge_sort_hybrid(arr,mid+1,r,s)
+        keys+= merge(arr,l,r)
+    return keys
 
 
