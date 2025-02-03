@@ -1,9 +1,9 @@
 import random
 
-n = 1000000 # number of samples
-for i in range(1,4):
+n = 1000000 # magnitude of samples
+for i in range(1,11): # from 1000 to 10 million
     f = open(f"input{str(i*n)}.txt","a")
-    data = random.sample(range(1,i*(n+1)),i*n)
+    data = random.sample(range(1,10000000+1),i*n)
     for i in range(0,len(data)):
         if (i != len(data)-1):
             f.write(str(data[i]) + ",")
