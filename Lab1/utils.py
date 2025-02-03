@@ -34,6 +34,28 @@ def merge(arr,l,r):
         idx+=1
     return keys
 
+def merge_sort(arr,l,r):
+    if(l < r):
+        keys = 0
+        mid = (l+r) // 2
+        keys += merge_sort(arr,l,mid)
+        keys += merge_sort(arr,mid+1,r)
+        keys += merge(arr,l,r)
+        return keys
+    else : return 0
+
+def merge_sort_hybrid(arr,l,r,s):
+    keys = 0
+    if(r-l+1 <= s):
+        keys += insertion_sort(arr,l,r)
+    else:
+        mid = (l+r) // 2
+        keys += merge_sort_hybrid(arr,l,mid,s)
+        keys+= merge_sort_hybrid(arr,mid+1,r,s)
+        keys+= merge(arr,l,r)
+    return keys
+
+
 def mergeSortwithComparisons(arr):
     if len(arr) <= 1:
         return arr,0
@@ -65,26 +87,5 @@ def mergeWithComparisons(left, right,totalkeycomparisons):
 
     return result,totalkeycomparisons
 
-
-def merge_sort(arr,l,r):
-    if(l < r):
-        keys = 0
-        mid = (l+r) // 2
-        keys += merge_sort(arr,l,mid)
-        keys += merge_sort(arr,mid+1,r)
-        keys += merge(arr,l,r)
-        return keys
-    else : return 0
-
-def merge_sort_hybrid(arr,l,r,s):
-    keys = 0
-    if(r-l+1 <= s):
-        keys += insertion_sort(arr,l,r)
-    else:
-        mid = (l+r) // 2
-        keys += merge_sort_hybrid(arr,l,mid,s)
-        keys+= merge_sort_hybrid(arr,mid+1,r,s)
-        keys+= merge(arr,l,r)
-    return keys
 
 
