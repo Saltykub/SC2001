@@ -15,10 +15,10 @@ for i in range(0,len(data)):
 t1_start = process_time() 
 
 data, keycomparisons = mergeSortwithComparisons(data)
-print(f"Sorted Array 1:{data}\n Key Comparisons:{keycomparisons}")
 # Stop the stopwatch / counter
 t1_stop = process_time()
- 
+
+print(f"Key Comparisons:{keycomparisons}")
 print("Elapsed time during the whole program in seconds:",
                                          t1_stop-t1_start) 
 
