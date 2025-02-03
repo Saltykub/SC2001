@@ -35,10 +35,10 @@ def mergeSortwithComparisons(arr):
     leftHalf = arr[:mid]
     rightHalf = arr[mid:]
     totalkeycomparisons = 0
-    sortedLeft,leftkeycomparisons = mergeSort(leftHalf)
-    sortedRight,rightkeycomparisons = mergeSort(rightHalf)
+    sortedLeft,leftkeycomparisons = mergeSortwithComparisons(leftHalf)
+    sortedRight,rightkeycomparisons = mergeSortwithComparisons(rightHalf)
     totalkeycomparisons = leftkeycomparisons+rightkeycomparisons
-    return merge(sortedLeft, sortedRight,totalkeycomparisons)
+    return mergeWithComparisons(sortedLeft, sortedRight,totalkeycomparisons)
 
 def mergeWithComparisons(left, right,totalkeycomparisons):
     result = []
