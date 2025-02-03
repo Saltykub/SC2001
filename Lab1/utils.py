@@ -27,6 +27,37 @@ def merge(arr,l,r):
         arr[k] = temp[idx]
         idx+=1
 
+def mergeSortwithComparisons(arr):
+    if len(arr) <= 1:
+        return arr,0
+
+    mid = len(arr) // 2
+    leftHalf = arr[:mid]
+    rightHalf = arr[mid:]
+    totalkeycomparisons = 0
+    sortedLeft,leftkeycomparisons = mergeSort(leftHalf)
+    sortedRight,rightkeycomparisons = mergeSort(rightHalf)
+    totalkeycomparisons = leftkeycomparisons+rightkeycomparisons
+    return merge(sortedLeft, sortedRight,totalkeycomparisons)
+
+def mergeWithComparisons(left, right,totalkeycomparisons):
+    result = []
+    i = j = 0
+
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+        totalkeycomparisons+=1
+
+    result.extend(left[i:])
+    result.extend(right[j:])
+
+    return result,totalkeycomparisons
+
 def merge_sort(arr,l,r):
     if(l < r):
         mid = (l+r) // 2
