@@ -60,7 +60,7 @@ def merge_sort_hybrid(arr,l,r,s):
 
 
 def generate_sample(n):
-    data = [random.randint(1, 1000000) for _ in range(n)]  
+    data = [random.randint(1, 10000000) for _ in range(n)]  
     return data
 
 
