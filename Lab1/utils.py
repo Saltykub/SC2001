@@ -1,3 +1,5 @@
+import random
+
 def insertion_sort (arr,l,r):
     keys = 0
     for i in range (l+1,r+1):
@@ -55,6 +57,11 @@ def merge_sort_hybrid(arr,l,r,s):
         keys+= merge_sort_hybrid(arr,mid+1,r,s)
         keys+= merge(arr,l,r)
     return keys
+
+
+def generate_sample(n):
+    data = [random.randint(1, 1000000) for _ in range(n)]  
+    return data
 
 
 # def mergeSortwithComparisons(arr):
