@@ -1,28 +1,27 @@
 import heapq
-
-def dijkstraMinHeap(adjMatrix):
-    V = len(adjMatrix)
-    S = [False] * V #array storing if node has been visited
-    d = [float('inf')] * V
-    pi = [-1] * V #array storing previous node 
-    d[0] = 0
-    pq = [(0, 0)]
+def dijkstraMinHeap(adjList, start=0):
+    V = len(adjList)  # Number of vertices
+    S = [False] * V  # Visited set
+    d = [float('inf')] * V  # Distance array
+    pi = [-1] * V  # Previous node array
+    d[start] = 0
+    pq = [(0, start)]  # Min heap priority queue
+    
     while pq:
         current_dist, current_node = heapq.heappop(pq)
         
         if S[current_node]:
             continue
         S[current_node] = True
-    
-        for neighbor in range(V):
-            weight = adjMatrix[current_node][neighbor]
-            if weight > 0 and not S[neighbor]:  # Only consider nonzero weights
+        
+        for neighbor, weight in adjList[current_node]:
+            if not S[neighbor]:
                 new_dist = current_dist + weight
                 if new_dist < d[neighbor]:
                     d[neighbor] = new_dist
                     pi[neighbor] = current_node
                     heapq.heappush(pq, (new_dist, neighbor))
-
+    
     return d, pi
 
 def dijkstraArray(adjMatrix):
