@@ -18,15 +18,13 @@ void solve (){
         // adj[v].pb({w,u});
     }
     vector<ll> dis(n+1,LLONG_MAX);
-    vector<bool> vis(n+1,false);
     dis[1] = 0;
     priority_queue<pii,vector<pii>,greater<pii>> pq;
     pq.push({0,1});
     while(!pq.empty()){
         ll cur = pq.top().st, node = pq.top().nd;
         pq.pop();
-        if(vis[node]) continue;
-        vis[node] = true;
+        if(cur != dis[node]) continue;
         for(auto a:adj[node]){
             ll v = a.nd, w = a.st;
             if(dis[v] > cur+w){
