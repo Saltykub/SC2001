@@ -19,7 +19,7 @@ def gen_connected_graph(n:int, m:int) -> list:
     weighted_graph = []
     for i in graph:
         temp = i.copy()
-        weight = random.randint(1,1000)
+        weight = random.randint(1,5000)
         temp.append(weight)
         weighted_graph.append(temp)
     return graph,weighted_graph
@@ -44,3 +44,13 @@ def adj_martix(n:int,g:list) -> list:
         adj[v][u] = w
     return adj
 
+def gen_completed_graph(n:int) -> list:
+    graph = []
+    for i in range(1,n+1):
+        for j in range(i+1,n+1):
+            graph.append([i,j])
+    weighted_graph = []
+    for g in graph:
+        w = random.randint(1,5000)
+        weighted_graph.append([g[0],g[1],w])
+    return graph, weighted_graph
