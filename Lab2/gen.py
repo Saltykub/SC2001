@@ -4,11 +4,12 @@ def gen_connected_graph(n:int, m:int) -> list:
 
     graph = []
     for i in range(1,n):
-        graph.append([i,i+1])
-
+        graph.append([i-1,i])
     while(len(graph) < m): 
         a = random.randint(1,n)
         b = random.randint(1,n)
+        a -= 1
+        b -= 1
         if(a > b): 
             temp = a
             a = b
@@ -52,5 +53,5 @@ def gen_completed_graph(n:int) -> list:
     weighted_graph = []
     for g in graph:
         w = random.randint(1,5000)
-        weighted_graph.append([g[0],g[1],w])
+        weighted_graph.append([g[0]-1,g[1]-1,w])
     return graph, weighted_graph
