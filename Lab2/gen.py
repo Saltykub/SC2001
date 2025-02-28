@@ -35,7 +35,7 @@ def adj_list(n:int,g:list) -> list:
         adj[v].append([u,w])
     return adj
 
-def adj_martix(n:int,g:list) -> list:
+def adj_matrix(n:int,g:list) -> list:
     adj = [[0 for i in range(n+1)] for j in range(n+1)]
     for edge in g: 
         u = edge[0]
