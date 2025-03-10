@@ -1,24 +1,23 @@
-def knapsack_unbounded(C, weights, profits, memo=None):
-    if memo is None:
-        memo = {}
+def knapsack_unbounded(C, weights, profits, max_profits=None):
+    if max_profits is None:
+        max_profits = {}
     
-    # Base case: If capacity is zero, max profit is zero
+    # if Capacity is 0, unable to fit any items inside
     if C == 0:
         return 0
     
-    # If already computed, return stored result
-    if C in memo:
-        return memo[C]
+    if C in max_profits:
+        return max_profits[C]
     
     max_profit = 0
-    
-    # Try including each item if it fits in the remaining capacity
+
+    # try fitting each item inside
     for i in range(len(weights)):
         if C >= weights[i]:
-            max_profit = max(max_profit, profits[i] + knapsack_unbounded(C - weights[i], weights, profits, memo))
+            # compare if max_profit with fitting extra item is greater than if item is fit in
+            max_profit = max(max_profit, profits[i] + knapsack_unbounded(C - weights[i], weights, profits, max_profits))
     
-    # Store result in memoization dictionary
-    memo[C] = max_profit
+    max_profits[C] = max_profit
     return max_profit
 
 # Example usage
