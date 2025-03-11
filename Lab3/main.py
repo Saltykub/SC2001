@@ -1,3 +1,8 @@
+weights1 = [4, 6, 8]
+weights2 = [5, 6, 8]
+profits = [7, 6, 9]
+capacity = 14
+
 def knapsack_unbounded(C, weights, profits, max_profits=None):
     if max_profits is None:
         max_profits = {}
@@ -20,21 +25,13 @@ def knapsack_unbounded(C, weights, profits, max_profits=None):
     max_profits[C] = max_profit
     return max_profit
 
-# Example usage
-weights = [4, 6, 8]  # Given weights
-profits = [7, 6, 9]  # Given profits
-C = 14  # Given capacity
 
 # Compute maximum profit
-max_profit = knapsack_unbounded(C, weights, profits)
+max_profit = knapsack_unbounded(capacity, weights1, profits)
 print("Maximum Profit:", max_profit)
 
-weights_btm_up1 = [4, 6, 8]
-weights_btm_up2 = [5, 6, 8]
-profits_btm_up = [7, 6, 9]
-capacity_btm_up = 14
 
-def dp_btm_up(Cpt, Pft, Wgt):
+def knapsack_btm_up(Cpt, Pft, Wgt):
     #initialize table size capacity +1
     dp = [0] * (Cpt+ 1)
     
@@ -55,7 +52,32 @@ def dp_btm_up(Cpt, Pft, Wgt):
 
 
 
-result_table1 = dp_btm_up(capacity_btm_up, profits_btm_up, weights_btm_up1)
-result_table2 = dp_btm_up(capacity_btm_up, profits_btm_up, weights_btm_up2)
+result_table1 = knapsack_btm_up(capacity, profits, weights1)
+result_table2 = knapsack_btm_up(capacity, profits, weights2)
 print("Bottom Up Approach (Table 1):", result_table1)
 print("Bottom Up Approach (Table 2):", result_table2)
+
+#2D matrix, easier to track but take more space? capacity * len(profits)
+def knapsack_2D(Cpt, Pft, Wgt):
+    
+    # matrix capacity and profit
+    dp = [[0 for _ in range(Cpt + 1)] for _ in range(len(Pft) + 1)]
+
+    # calculate maximum profit for each 
+    # item index and knapsack weight.
+    for i in range(len(Pft) - 1, -1, -1):
+        for j in range(1, Cpt + 1):
+
+            take = 0
+            #if capacity - weight of current item > 0 we take
+            if j - Wgt[i] >= 0:
+                take = Pft[i] + dp[i][j - Wgt[i]]
+            #compare with next item
+            noTake = dp[i + 1][j]
+
+            dp[i][j] = max(take, noTake)
+    #max profit is in dp[0][capacity]
+    return dp[0][Cpt]
+
+print(knapsack_2D(capacity, profits, weights1))  
+print(knapsack_2D(capacity, profits, weights2))  
