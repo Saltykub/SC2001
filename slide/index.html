@@ -201,28 +201,6 @@
 							   // initialize dp 
 								int n = 3, C = 14;
 								vector<int> w{0, 4, 6, 8 }, p{0,7,6,9};
-								vector<vector<int>> dp(n+1,vector<int>(C+1,0));
-								for(int i = 1; i <= n; i++){
-									for(int j = 0; j <= C; j++){
-										dp[i][j] = dp[i-1][j];
-										if(j-w[i] >= 0) dp[i][j] = max(dp[i][j],dp[i][j-w[i]]+p[i]);
-									}
-								}
-								cout << dp[n][C];
-							}
-					</script>
-					</code></pre>
-				</section>
-				<section data-auto-animate>
-					Memory optimization
-					<pre data-id="code-animation"><code data-trim data-line-numbers data-noescape class="cpp">
-						<script type="text/template">
-							#include<bits/stdc++.h>
-							using namespace std;
-							int main(){   
-							   // initialize dp 
-								int n = 3, C = 14;
-								vector<int> w{0, 4, 6, 8 }, p{0,7,6,9};
 								vector<int> dp(C+1,0);
 								for (int i = 0; i < n; i++) {
 									for (int j = 0; j <= C; j++) {
